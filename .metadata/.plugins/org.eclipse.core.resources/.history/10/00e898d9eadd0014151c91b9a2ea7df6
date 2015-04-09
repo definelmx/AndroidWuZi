@@ -1,0 +1,14 @@
+package com.uestclmx.wwwuzi.ai;
+
+import com.uestclmx.wwwuzi.gamerule.GameRule;
+
+public abstract class AI {
+	protected GameRule rule;
+	public int player;
+
+	public AI(GameRule rule) {
+		this.rule = rule;
+	}
+
+	abstract public void next();
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.support.v4.app.FragmentActivity"/>
+<fullyQualifiedTypeName name="android.app.Activity"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="android.view.ViewGroup"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R.layout"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.GameActivity"/>
+<fullyQualifiedTypeName name="android.widget.RelativeLayout"/>
+<fullyQualifiedTypeName name="android.widget.GridLayout"/>
+<fullyQualifiedTypeName name="android.widget.TableLayout"/>
+<fullyQualifiedTypeName name="android.widget.GridView"/>
+<fullyQualifiedTypeName name="android.widget.BaseAdapter"/>
+<fullyQualifiedTypeName name="android.R.color"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="android.widget.LinearLayout"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R"/>
+<fullyQualifiedTypeName name="android.view.MotionEvent"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.gamerule.GameMap"/>
+<fullyQualifiedTypeName name="java.util.Queue"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R.drawable"/>
+<fullyQualifiedTypeName name="android.widget.ScrollView"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.gameviews.ChessboardView"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R.id"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.gameviews.ChessboardView.ChessboardBlock"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.gamerule.GameRule"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.ai.NoLimitAi"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.ai.AI"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R.anim"/>
+</qualifiedTypeNameHistroy>

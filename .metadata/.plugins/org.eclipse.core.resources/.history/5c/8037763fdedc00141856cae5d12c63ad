@@ -1,0 +1,159 @@
+package com.uestclmx.wwwuzi.gameviews;
+
+import com.uestclmx.wwwuzi.R;
+import com.uestclmx.wwwuzi.gamerule.GameMap;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+/**
+ * 用于棋盘的每一个格子
+ * 
+ * @author 鸣晓
+ * 
+ */
+public class ChessboardBlock extends RelativeLayout {
+
+	public ChessboardBlock(Context context) {
+		super(context);
+		init(context);
+	}
+
+	public ChessboardBlock(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init(context);
+	}
+
+	public ChessboardBlock(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		init(context);
+	}
+
+	/**
+	 * 容器，包括格子线
+	 */
+	private View content;
+
+	/**
+	 * 标签
+	 */
+	private View target;
+
+	/**
+	 * 棋子
+	 */
+	private View chess;
+
+	/**
+	 * 初始化
+	 * 
+	 * @param context
+	 */
+	private void init(Context context) {
+		content = View.inflate(context, R.layout.tools_chessboardblock, null);
+		this.addView(content);
+		target = content.findViewById(R.id.target);
+		chess = content.findViewById(R.id.chess);
+		// 临时测试用代码
+		// content.findViewById(R.id.chessbut).setOnClickListener(
+		// new OnClickListener() {
+		//
+		// int count = 1;
+		//
+		// @Override
+		// public void onClick(View v) {
+		// switch (count) {
+		// case 1:
+		// setSelected(true);
+		// break;
+		// case 2:
+		// setSelected(false);
+		// break;
+		// case 3:
+		// setSelected(true);
+		// break;
+		// case 4:
+		// setSelected(false);
+		// break;
+		// default:
+		// setSelected(false);
+		// }
+		// setState(count);
+		// count++;
+		// count = count % 5;
+		// }
+		//
+		// });
+
+	}
+
+	/**
+	 * 设置选中效果是否出现
+	 */
+	public void setSelected(boolean sel) {
+		if (sel) {
+			target.setVisibility(View.VISIBLE);
+		} else {
+			target.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	/**
+	 * 设置棋子
+	 * 
+	 * @param state
+	 *            1黑2黑透3白4白透
+	 */
+	public void setState(int state) {
+		switch (state) {
+		case GameMap.BLACK:
+			chess.setBackgroundResource(R.drawable.chessblack);
+			break;
+		case GameMap.BLACK_UN:
+			chess.setBackgroundResource(R.drawable.chessblack_trans);
+			break;
+		case GameMap.WHITE:
+			chess.setBackgroundResource(R.drawable.chesswhite);
+			break;
+		case GameMap.WHITE_UN:
+			chess.setBackgroundResource(R.drawable.chesswhite_trans);
+			break;
+		default:
+			chess.setBackgroundColor(Color.TRANSPARENT);
+		}
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		if (event.getPointerCount() == 1) {
+			switch (event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				return true;
+			case MotionEvent.ACTION_MOVE:
+				if (event.getX(0) < 0 || event.getX(0) >= this.getWidth()
+						|| event.getY(0) < 0
+						|| event.getY(0) >= this.getHeight()) {
+					return false;
+				} else
+					return true;
+			case MotionEvent.ACTION_UP:
+				if (event.getX(0) < 0 || event.getX(0) >= this.getWidth()
+						|| event.getY(0) < 0
+						|| event.getY(0) >= this.getHeight()) {
+					return false;
+				} else {
+					this.performClick();
+					return true;
+				}
+			case MotionEvent.ACTION_CANCEL:
+			default:
+				return false;
+			}
+		}
+		return super.onTouchEvent(event);
+	}
+}

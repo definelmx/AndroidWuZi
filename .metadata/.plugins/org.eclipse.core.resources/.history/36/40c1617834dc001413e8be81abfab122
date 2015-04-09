@@ -1,0 +1,45 @@
+package com.uestclmx.wwwuzi.gameviews;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewConfiguration;
+
+public class MButton extends View {
+
+	private int slop;
+
+	public MButton(Context context) {
+		super(context);
+		slop = ViewConfiguration.get(context).getScaledTouchSlop();
+	}
+
+	public MButton(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		slop = ViewConfiguration.get(context).getScaledTouchSlop();
+	}
+
+	public MButton(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+		slop = ViewConfiguration.get(context).getScaledTouchSlop();
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+			final int x = (int) event.getX();
+			final int y = (int) event.getY();
+
+			// Be lenient about moving outside of buttons
+			if (!(x >= -slop && y >= -slop
+					&& x < ((getRight() - getLeft()) + slop) && y < ((getBottom() - getTop()) + slop))) {
+				super.onTouchEvent(event);
+				return false;
+			}
+
+		}
+		return super.onTouchEvent(event);
+	}
+}

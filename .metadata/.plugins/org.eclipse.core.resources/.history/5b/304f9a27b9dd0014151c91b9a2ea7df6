@@ -1,0 +1,7 @@
+package com.uestclmx.wwwuzi.ai;
+
+public class Ai {
+	public Ai(GameRule rule){
+		
+	}
+}

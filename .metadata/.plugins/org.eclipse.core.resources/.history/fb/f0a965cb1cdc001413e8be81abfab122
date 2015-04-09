@@ -1,0 +1,22 @@
+package com.uestclmx.wwwuzi.gameviews;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.Button;
+
+public class MButton extends View {
+
+	public MButton(Context context) {
+		super(context);
+	}
+
+	public MButton(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
+	public MButton(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+	}
+
+}

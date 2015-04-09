@@ -1,0 +1,44 @@
+package com.uestclmx.wwwuzi.ai;
+
+import com.uestclmx.wwwuzi.gamerule.GameRule;
+
+public class NoLimitAi extends Ai {
+
+	private int[] tupleScoreTable;
+
+	private void init() {
+		tupleScoreTable = new int[11];
+		tupleScoreTable[0] = 7;
+		tupleScoreTable[1] = 35;
+		tupleScoreTable[2] = 800;
+		tupleScoreTable[3] = 15000;
+		tupleScoreTable[4] = 800000;
+		tupleScoreTable[5] = 15;
+		tupleScoreTable[6] = 400;
+		tupleScoreTable[7] = 1800;
+		tupleScoreTable[8] = 100000;
+		tupleScoreTable[9] = 0;
+		tupleScoreTable[10] = 0;
+	}
+
+	public int player;
+
+	public NoLimitAi(GameRule rule) {
+		super(rule);
+		player = 0;
+		init();
+	}
+
+	public NoLimitAi(GameRule rule, int player) {
+		super(rule);
+		this.player = player;
+		init();
+	}
+
+	@Override
+	void next() {
+		rule.map.clearvalue();
+
+	}
+
+}

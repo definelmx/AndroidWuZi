@@ -1,0 +1,28 @@
+package com.uestclmx.wwwuzi.gameviews;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+
+public class MButton extends View {
+
+	public MButton(Context context) {
+		super(context);
+	}
+
+	public MButton(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
+	public MButton(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+	}
+	
+	@Override
+    public boolean onTouchEvent(MotionEvent event) {
+		return super.onTouchEvent(event);
+	}
+	
+
+}

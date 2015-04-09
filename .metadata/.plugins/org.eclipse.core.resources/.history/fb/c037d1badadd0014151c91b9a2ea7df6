@@ -1,0 +1,224 @@
+package com.uestclmx.wwwuzi.gamerule;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameRule {
+
+	/**
+	 * 历史链表类
+	 * 
+	 * @author 鸣晓
+	 * 
+	 */
+	public class HistoryNode {
+		public HistoryNode() {
+			x = -1;
+			y = -1;
+			player = -1;
+		}
+
+		public HistoryNode(int y, int x, int player) {
+			this.x = x;
+			this.y = y;
+			this.player = player;
+		}
+
+		public int x, y;
+		public int player;
+	}
+
+	/**
+	 * 规定左上角为坐标原点
+	 */
+	public GameMap map;
+	/**
+	 * 确认模式下最近下棋点
+	 */
+	public int lx, ly;
+	/**
+	 * 哪一方玩家下棋
+	 */
+	public int turn = 0;
+	/**
+	 * 历史链表
+	 */
+	public List<HistoryNode> history;
+
+	public GameRule() {
+		map = new GameMap();
+		history = new ArrayList<HistoryNode>();
+		init();
+	}
+
+	/**
+	 * 初始化清空棋盘
+	 */
+	public void init() {
+		history.clear();
+		map.clear();
+		turn = 0;
+		lx = -1;
+		ly = -1;
+	}
+
+	/**
+	 * 某方玩家下棋，下棋后需要确认
+	 * 
+	 * @param y
+	 *            竖直坐标
+	 * @param x
+	 *            水平坐标
+	 * @param player
+	 *            黑方为0，白方为1
+	 * @param mode
+	 *            模式0为需要确认，1为不需确认
+	 * @return 下子成功返回2，待确认返回1，失败返回0
+	 */
+	public int putchess(int y, int x, int player, int mode) {
+		if (mode == 0) {
+			switch (map.board[y][x]) {
+			case GameMap.NONE:
+				if (player == 0) {
+					map.board[y][x] = GameMap.BLACK_UN;
+					if (ly > -1 && lx > -1
+							&& map.board[ly][lx] == GameMap.BLACK_UN) {
+						map.board[ly][lx] = GameMap.NONE;
+					}
+					ly = y;
+					lx = x;
+				} else if (player == 1) {
+					map.board[y][x] = GameMap.WHITE_UN;
+					if (ly > -1 && lx > -1
+							&& map.board[ly][lx] == GameMap.WHITE_UN) {
+						map.board[ly][lx] = GameMap.NONE;
+					}
+					ly = y;
+					lx = x;
+				} else
+					return 0;
+				return 1;
+			case GameMap.BLACK_UN:
+				if (player == 0) {
+					map.board[y][x] = GameMap.BLACK;
+					history.add(new HistoryNode(y, x, 0));
+					calculatecount(y, x, 0);
+					ly = -1;
+					lx = -1;
+					return 2;
+				}
+				return 0;
+			case GameMap.WHITE_UN:
+				if (player == 1) {
+					map.board[y][x] = GameMap.WHITE;
+					calculatecount(y, x, 1);
+					ly = -1;
+					lx = -1;
+					history.add(new HistoryNode(y, x, 1));
+					return 2;
+				}
+				return 0;
+			}
+			return 0;
+		} else {
+			if (map.board[y][x] == 0) {
+				if (player == 0) {
+					map.board[y][x] = GameMap.BLACK;
+					history.add(new HistoryNode(y, x, 0));
+					calculatecount(y, x, 0);
+				} else if (player == 1) {
+					map.board[y][x] = GameMap.WHITE;
+					history.add(new HistoryNode(y, x, 1));
+					calculatecount(y, x, 1);
+				}
+				return 2;
+			}
+		}
+		return 0;
+	}
+
+	/**
+	 * 方向备注：竖直方向为0，顺时针增序，最大为3
+	 * 
+	 * @param y
+	 * @param x
+	 * @param player
+	 */
+	private void calculatecount(int y, int x, int turn) {
+		int player = (turn == 0 ? GameMap.BLACK : GameMap.WHITE), i, j, l;
+		// 纵向
+		l = 0;
+		i = y;
+		j = x;
+		while (i-- > 0 && map.board[i][j] == player)
+			l++;
+		i = y;
+		while (++i < GameMap.CHESSBOARD_SIZE && map.board[i][j] == player)
+			l++;
+		map.count[y][x][0] = l + 1;
+		// 左下右上
+		l = 0;
+		i = y;
+		j = x;
+		while (i-- > 0 && ++j < GameMap.CHESSBOARD_SIZE
+				&& map.board[i][j] == player)
+			l++;
+		i = y;
+		j = x;
+		while (++i < GameMap.CHESSBOARD_SIZE && j-- > 0
+				&& map.board[i][j] == player)
+			l++;
+		map.count[y][x][1] = l + 1;
+		// 横向
+		l = 0;
+		i = y;
+		j = x;
+		while (j-- > 0 && map.board[i][j] == player)
+			l++;
+		j = x;
+		while (++j < GameMap.CHESSBOARD_SIZE && map.board[i][j] == player)
+			l++;
+		map.count[y][x][2] = l + 1;
+		// 左上右下
+		l = 0;
+		i = y;
+		j = x;
+		while (j-- > 0 && i-- > 0 && map.board[i][j] == player)
+			l++;
+		i = y;
+		j = x;
+		while (++j < GameMap.CHESSBOARD_SIZE && ++i < GameMap.CHESSBOARD_SIZE
+				&& map.board[i][j] == player)
+			l++;
+		map.count[y][x][3] = l + 1;
+	}
+
+	/**
+	 * 判断在（y,x）点下子者是否胜利。仅下子后有效；方向备注：竖直方向为0，顺时针增序，最大为3.
+	 * 
+	 * @param y
+	 * @param x
+	 * @param player
+	 * @return
+	 */
+	public boolean iswin(int y, int x, int player) {
+		int i;
+		for (i = 0; i < 4; i++)
+			if (map.count[y][x][i] >= 5)
+				return true;
+		return false;
+	}
+
+	public void cancel() {
+		if (history.size() > 0) {
+			HistoryNode temp = history.get(history.size() - 1);
+			if (ly >= 0 && lx >= 0)
+				map.board[ly][lx] = GameMap.NONE;
+			ly = -1;
+			lx = -1;
+			turn = temp.player;
+			map.board[temp.y][temp.x] = GameMap.NONE;
+			history.remove(history.size() - 1);
+		}
+	}
+}

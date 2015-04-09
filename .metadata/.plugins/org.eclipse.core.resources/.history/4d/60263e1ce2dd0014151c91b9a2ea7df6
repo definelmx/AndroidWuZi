@@ -1,0 +1,71 @@
+package com.uestclmx.wwwuzi.ai;
+
+import com.uestclmx.wwwuzi.gamerule.GameMap;
+import com.uestclmx.wwwuzi.gamerule.GameRule;
+
+public class NoLimitAi extends Ai {
+
+	private int[] scoreTable;
+
+	private void init() {
+		scoreTable = new int[11];
+		scoreTable[0] = 7;
+		scoreTable[1] = 35;
+		scoreTable[2] = 800;
+		scoreTable[3] = 15000;
+		scoreTable[4] = 800000;
+		scoreTable[5] = 15;
+		scoreTable[6] = 400;
+		scoreTable[7] = 1800;
+		scoreTable[8] = 100000;
+		scoreTable[9] = 0;
+	}
+
+	public int player;
+
+	public NoLimitAi(GameRule rule) {
+		super(rule);
+		player = 0;
+		init();
+	}
+
+	public NoLimitAi(GameRule rule, int player) {
+		super(rule);
+		this.player = player;
+		init();
+	}
+
+	@Override
+	void next() {
+		rule.map.clearvalue();
+		int i, j, k, white, black;
+		for (i = 0; i < rule.map.value.length; i++)
+			for (j = 0; j < rule.map.value[0].length; j++) {
+				if (i < rule.map.value.length - 4) {
+					white = 0;
+					black = 0;
+					for (k = 0; k < 5; k++) {
+						if (rule.map.board[i + k][j] == GameMap.BLACK)
+							black++;
+						if (rule.map.board[i + k][j] == GameMap.WHITE)
+							white++;
+					}
+					for (k = 0; k < 5; k++) {
+						if (white == 0 && black == 0) {
+							rule.map.value[i + k][j] += scoreTable[0];
+						} else if (white == 0 && black != 0) {
+							rule.map.value[i + k][j] += (player == 0 ? scoreTable[4 + white]
+									: scoreTable[white]);
+						} else if (white != 0 && black == 0) {
+							rule.map.value[i + k][j] += (player == 0 ? scoreTable[black]
+									: scoreTable[4 + black]);
+						} else {
+							rule.map.value[i + k][j] += (player == 0 ? scoreTable[black]
+									: scoreTable[4 + black]);
+						}
+					}
+				}
+			}
+	}
+
+}

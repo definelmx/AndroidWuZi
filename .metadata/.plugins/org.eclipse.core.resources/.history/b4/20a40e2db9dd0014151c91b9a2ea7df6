@@ -1,0 +1,9 @@
+package com.uestclmx.wwwuzi.ai;
+
+import com.uestclmx.wwwuzi.gamerule.GameRule;
+
+public class Ai {
+	public Ai(GameRule rule){
+		
+	}
+}

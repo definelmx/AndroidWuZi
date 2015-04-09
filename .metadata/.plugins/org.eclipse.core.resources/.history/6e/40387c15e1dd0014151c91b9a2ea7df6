@@ -1,0 +1,112 @@
+package com.uestclmx.wwwuzi.ai;
+
+import com.uestclmx.wwwuzi.gamerule.GameMap;
+import com.uestclmx.wwwuzi.gamerule.GameRule;
+
+public class NoLimitAi extends Ai {
+
+	private int[] tupleScoreTable;
+
+	private void init() {
+		tupleScoreTable = new int[11];
+		tupleScoreTable[0] = 7;
+		tupleScoreTable[1] = 35;
+		tupleScoreTable[2] = 800;
+		tupleScoreTable[3] = 15000;
+		tupleScoreTable[4] = 800000;
+		tupleScoreTable[5] = 15;
+		tupleScoreTable[6] = 400;
+		tupleScoreTable[7] = 1800;
+		tupleScoreTable[8] = 100000;
+		tupleScoreTable[9] = 0;
+		tupleScoreTable[10] = 0;
+	}
+
+	public int player;
+
+	public NoLimitAi(GameRule rule) {
+		super(rule);
+		player = 0;
+		init();
+	}
+
+	public NoLimitAi(GameRule rule, int player) {
+		super(rule);
+		this.player = player;
+		init();
+	}
+
+	@Override
+	void next() {
+		rule.map.clearvalue();
+		int i, j, k, white, black;
+		for (i = 0; i < rule.map.value.length; i++)
+			for (j = 0; j < rule.map.value[0].length; j++) {
+				if (i < rule.map.value.length - 4) {
+					white = 0;
+					black = 0;
+					for (k = 0; k < 5; k++) {
+						if (rule.map.board[i + k][j] == GameMap.BLACK)
+							black++;
+						if (rule.map.board[i + k][j] == GameMap.WHITE)
+							white++;
+					}
+					if (white == 0 && black == 0) {
+
+					}
+				}
+			}
+		int player = (turn == 0 ? GameMap.BLACK : GameMap.WHITE), i, j, l;
+		// 纵向
+		l = 0;
+		i = y;
+		j = x;
+		while (i-- > 0 && map.board[i][j] == player)
+			l++;
+		i = y;
+		while (++i < GameMap.CHESSBOARD_SIZE && map.board[i][j] == player)
+			l++;
+		if (l >= 4)
+			return true;
+		// 左下右上
+		l = 0;
+		i = y;
+		j = x;
+		while (i-- > 0 && ++j < GameMap.CHESSBOARD_SIZE
+				&& map.board[i][j] == player)
+			l++;
+		i = y;
+		j = x;
+		while (++i < GameMap.CHESSBOARD_SIZE && j-- > 0
+				&& map.board[i][j] == player)
+			l++;
+		if (l >= 4)
+			return true;
+		// 横向
+		l = 0;
+		i = y;
+		j = x;
+		while (j-- > 0 && map.board[i][j] == player)
+			l++;
+		j = x;
+		while (++j < GameMap.CHESSBOARD_SIZE && map.board[i][j] == player)
+			l++;
+		if (l >= 4)
+			return true;
+		// 左上右下
+		l = 0;
+		i = y;
+		j = x;
+		while (j-- > 0 && i-- > 0 && map.board[i][j] == player)
+			l++;
+		i = y;
+		j = x;
+		while (++j < GameMap.CHESSBOARD_SIZE && ++i < GameMap.CHESSBOARD_SIZE
+				&& map.board[i][j] == player)
+			l++;
+		if (l >= 4)
+			return true;
+		return false;
+	}
+
+}
