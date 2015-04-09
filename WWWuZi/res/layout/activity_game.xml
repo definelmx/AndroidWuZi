@@ -17,30 +17,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="五子棋" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="玩家执黑" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/gamebottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white" >
+        android:background="@android:color/black"
+        android:gravity="center" >
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:onClick="cancel"
             android:text="悔棋" />
 
+        <RelativeLayout
+            android:layout_width="90dp"
+            android:layout_height="90dp" >
+
+            <View
+                android:id="@+id/blackturn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/chessbox_black" />
+
+            <View
+                android:id="@+id/whiteturn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/chessbox_white"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:onClick="reset"
             android:text="重新开始" />
     </LinearLayout>

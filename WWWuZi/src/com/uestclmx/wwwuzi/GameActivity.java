@@ -17,6 +17,17 @@ public class GameActivity extends Activity {
 	public GameRule rule;
 	public ChessboardView chess;
 	public AI ai;
+	private View blackview, whiteview;
+
+	private void changeturn(int turn) {
+		if (turn == 0) {
+			whiteview.setVisibility(View.INVISIBLE);
+			blackview.setVisibility(View.VISIBLE);
+		} else if (turn == 1) {
+			whiteview.setVisibility(View.VISIBLE);
+			blackview.setVisibility(View.INVISIBLE);
+		}
+	}
 
 	/**
 	 * 0为单人ai对战，1为双人本地对战
@@ -31,6 +42,8 @@ public class GameActivity extends Activity {
 		chess = (ChessboardView) this.findViewById(R.id.chessboard);
 		chess.setRule(rule);
 		chess.setChildOnClickListener(new MyOnClickListener());
+		blackview = this.findViewById(R.id.blackturn);
+		whiteview = this.findViewById(R.id.whiteturn);
 		// 设置ai为白方
 		String st = this.getIntent().getStringExtra(MainActivity.MODE);
 		if (st.equals(MainActivity.SINGLEGAME)) {
@@ -48,11 +61,13 @@ public class GameActivity extends Activity {
 		if (mode == 0) {
 			rule.cancel();
 		}
+		changeturn(rule.turn);
 		chess.refresh();
 	}
 
 	public void reset(View v) {
 		rule.init();
+		changeturn(rule.turn);
 		chess.refresh();
 	}
 
@@ -79,6 +94,7 @@ public class GameActivity extends Activity {
 					return;
 				}
 				rule.turn = (rule.turn + 1) & 1;
+				changeturn(rule.turn);
 				if (mode == 0) {
 					ai.next();
 					/*
@@ -91,9 +107,11 @@ public class GameActivity extends Activity {
 								"" + (rule.turn == 0 ? "黑" : "白") + "方获胜")
 								.show();
 						rule.init();
+						changeturn(rule.turn);
 						return;
 					}
 					rule.turn = (rule.turn + 1) & 1;
+					changeturn(rule.turn);
 				}
 			} else {
 			}

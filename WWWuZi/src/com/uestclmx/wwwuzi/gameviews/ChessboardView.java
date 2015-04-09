@@ -153,7 +153,7 @@ public class ChessboardView extends ViewGroup {
 		init(context);
 	}
 
-	final static int CHESSBOARD_HEIGHT = 80;
+	final static int CHESSBOARD_HEIGHT = 70;
 
 	/**
 	 * 格子数组

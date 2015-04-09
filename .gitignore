@@ -1,6 +1,6 @@
 
 # Android Workspace files
-.metadata/
+/.metadata/
 
 # Built application files
 *.apk

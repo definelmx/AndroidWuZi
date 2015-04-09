@@ -25,7 +25,6 @@
 <fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R.drawable"/>
 <fullyQualifiedTypeName name="android.widget.ScrollView"/>
 <fullyQualifiedTypeName name="com.uestclmx.wwwuzi.gameviews.ChessboardView"/>
-<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R.id"/>
 <fullyQualifiedTypeName name="com.uestclmx.wwwuzi.gameviews.ChessboardView.ChessboardBlock"/>
 <fullyQualifiedTypeName name="com.uestclmx.wwwuzi.gamerule.GameRule"/>
 <fullyQualifiedTypeName name="java.util.List"/>
@@ -34,4 +33,6 @@
 <fullyQualifiedTypeName name="com.uestclmx.wwwuzi.ai.NoLimitAi"/>
 <fullyQualifiedTypeName name="com.uestclmx.wwwuzi.ai.AI"/>
 <fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R.anim"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="com.uestclmx.wwwuzi.R.id"/>
 </qualifiedTypeNameHistroy>

@@ -3,6 +3,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mainpage"
     tools:context="com.uestclmx.wwwuzi.MainActivity" >
 
     <LinearLayout
@@ -13,27 +14,47 @@
         android:orientation="vertical" >
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/chessblack_main"
             android:onClick="singlegame"
-            android:text="单人游戏" />
+            android:text="单人\n游戏"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chesswhite_main"
             android:onClick="playergame"
-            android:text="双人游戏" />
+            android:text="双人\n游戏"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chessblack_main"
             android:onClick="configues"
-            android:text="设置游戏" />
+            android:text="设置"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="exit" />
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chesswhite_main"
+            android:onClick="exitgame"
+            android:text="离开\n游戏"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
     </LinearLayout>
 
 </RelativeLayout>
